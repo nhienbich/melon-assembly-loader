@@ -117,4 +117,4 @@ MelonLoader 0.6+ IL2CPP mod that hot-loads `UserData/assembly/Payload.dll` witho
 
 `Unload()` must drop Harmony patches, Unity objects and statics or the collectible load context will stay alive. Do not call `UnityEngine.Debug` (IL2CPP access violation). Mono games are not supported.
 
-##Big Thank Grok AI.
+## Big Thank Grok AI.

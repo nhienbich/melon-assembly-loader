@@ -15,6 +15,10 @@
       <HintPath>$(MelonNet6)/MelonLoader.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="MelonLoader">
+      <HintPath>$(MelonNet6)/MelonLoader.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="Il2CppInterop.Runtime">
       <HintPath>$(InteropRuntime)</HintPath>
       <Private>false</Private>
@@ -25,6 +29,18 @@
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>$(UnityCoreModule)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(MelonNet6)/0Harmony.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(Il2CppDir)/UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(Il2CppDir)/Assembly-CSharp.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
