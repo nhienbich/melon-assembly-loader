@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+.idea/
+*.user
+*.suo
+Libs/*.dll
+Libs/*.pdb
+Libs/*.xml
+TestResults/

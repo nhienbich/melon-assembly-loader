@@ -1,0 +1,28 @@
+<Project>
+  <!--
+    GameDir: thư mục game đã cài MelonLoader và đã mở một lần
+    (có MelonLoader/net6 và MelonLoader/Il2CppAssemblies).
+    Hoặc để mặc định Libs/ và copy DLL vào đó. Xem Libs/README.md.
+  -->
+  <PropertyGroup>
+    <GameDir Condition="'$(GameDir)' == ''">$(MSBuildThisFileDirectory)Libs</GameDir>
+    <MelonNet6 Condition="Exists('$(GameDir)/MelonLoader/net6/MelonLoader.dll')">$(GameDir)/MelonLoader/net6</MelonNet6>
+    <MelonNet6 Condition="'$(MelonNet6)' == ''">$(GameDir)</MelonNet6>
+    <Il2CppDir Condition="Exists('$(GameDir)/MelonLoader/Il2CppAssemblies')">$(GameDir)/MelonLoader/Il2CppAssemblies</Il2CppDir>
+    <Il2CppDir Condition="'$(Il2CppDir)' == ''">$(GameDir)</Il2CppDir>
+
+    <_UnityPlain>$(Il2CppDir)/UnityEngine.CoreModule.dll</_UnityPlain>
+    <_UnityPrefixed>$(Il2CppDir)/Il2CppUnityEngine.CoreModule.dll</_UnityPrefixed>
+    <UnityCoreModule Condition="Exists('$(_UnityPlain)')">$(_UnityPlain)</UnityCoreModule>
+    <UnityCoreModule Condition="'$(UnityCoreModule)' == '' AND Exists('$(_UnityPrefixed)')">$(_UnityPrefixed)</UnityCoreModule>
+    <UnityCoreModule Condition="'$(UnityCoreModule)' == ''">$(_UnityPlain)</UnityCoreModule>
+
+    <_InteropNet6>$(MelonNet6)/Il2CppInterop.Runtime.dll</_InteropNet6>
+    <_InteropIl2>$(Il2CppDir)/Il2CppInterop.Runtime.dll</_InteropIl2>
+    <InteropRuntime Condition="Exists('$(_InteropNet6)')">$(_InteropNet6)</InteropRuntime>
+    <InteropRuntime Condition="'$(InteropRuntime)' == '' AND Exists('$(_InteropIl2)')">$(_InteropIl2)</InteropRuntime>
+    <InteropRuntime Condition="'$(InteropRuntime)' == ''">$(_InteropNet6)</InteropRuntime>
+
+    <Il2CppMscorlib>$(Il2CppDir)/Il2Cppmscorlib.dll</Il2CppMscorlib>
+  </PropertyGroup>
+</Project>

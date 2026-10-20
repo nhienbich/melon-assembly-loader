@@ -1,0 +1,13 @@
+<Project>
+  <Target Name="EnsureMelonLoaderReferences" BeforeTargets="ResolveAssemblyReferences">
+    <Error
+      Condition="!Exists('$(MelonNet6)/MelonLoader.dll')"
+      Text="Không thấy $(MelonNet6)/MelonLoader.dll. Sửa GameDir trong Directory.Build.props tới thư mục game (đã chạy MelonLoader một lần), hoặc copy DLL vào Libs/. Xem README." />
+    <Error
+      Condition="'$(RequiresUnityInterop)' == 'true' AND !Exists('$(UnityCoreModule)')"
+      Text="Không thấy UnityEngine.CoreModule. Cần $(Il2CppDir)/UnityEngine.CoreModule.dll hoặc Il2CppUnityEngine.CoreModule.dll." />
+    <Error
+      Condition="'$(RequiresUnityInterop)' == 'true' AND !Exists('$(InteropRuntime)')"
+      Text="Không thấy Il2CppInterop.Runtime.dll trong $(MelonNet6) hoặc $(Il2CppDir)." />
+  </Target>
+</Project>
