@@ -116,3 +116,5 @@ MelonLoader 0.6+ IL2CPP mod that hot-loads `UserData/assembly/Payload.dll` witho
 4. Put `Payload.dll` in `UserData/assembly/`. The mod calls `public static void Main()` and, on change, `Unload()` then `Main()` again.
 
 `Unload()` must drop Harmony patches, Unity objects and statics or the collectible load context will stay alive. Do not call `UnityEngine.Debug` (IL2CPP access violation). Mono games are not supported.
+
+##Big Thank Grok AI.
