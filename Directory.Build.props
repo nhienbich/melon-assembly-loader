@@ -24,5 +24,12 @@
     <InteropRuntime Condition="'$(InteropRuntime)' == ''">$(_InteropNet6)</InteropRuntime>
 
     <Il2CppMscorlib>$(Il2CppDir)/Il2Cppmscorlib.dll</Il2CppMscorlib>
+
+    <!-- Mono ScriptLoader. net35 covers older Unity; pass -p:MonoTf=net472 for bleeding-edge Mono. -->
+    <MonoTf Condition="'$(MonoTf)' == ''">net35</MonoTf>
+    <MelonMonoDir Condition="Exists('$(GameDir)/MelonLoader/net35/MelonLoader.dll')">$(GameDir)/MelonLoader/net35</MelonMonoDir>
+    <MelonMonoDir Condition="'$(MelonMonoDir)' == '' AND Exists('$(GameDir)/MelonLoader/net472/MelonLoader.dll')">$(GameDir)/MelonLoader/net472</MelonMonoDir>
+    <MelonMonoDir Condition="'$(MelonMonoDir)' == ''">$(GameDir)</MelonMonoDir>
+    <McsDll>$(MSBuildThisFileDirectory)lib/mcs.dll</McsDll>
   </PropertyGroup>
 </Project>

@@ -1,7 +1,7 @@
 <Project>
   <Target Name="EnsureMelonLoaderReferences" BeforeTargets="ResolveAssemblyReferences">
     <Error
-      Condition="!Exists('$(MelonNet6)/MelonLoader.dll')"
+      Condition="'$(RequiresMelonNet6)' == 'true' AND !Exists('$(MelonNet6)/MelonLoader.dll')"
       Text="Không thấy $(MelonNet6)/MelonLoader.dll. Sửa GameDir trong Directory.Build.props tới thư mục game (đã chạy MelonLoader một lần), hoặc copy DLL vào Libs/. Xem README." />
     <Error
       Condition="'$(RequiresUnityInterop)' == 'true' AND !Exists('$(UnityCoreModule)')"
@@ -9,5 +9,11 @@
     <Error
       Condition="'$(RequiresUnityInterop)' == 'true' AND !Exists('$(InteropRuntime)')"
       Text="Không thấy Il2CppInterop.Runtime.dll trong $(MelonNet6) hoặc $(Il2CppDir)." />
+    <Error
+      Condition="'$(RequiresMelonMono)' == 'true' AND !Exists('$(MelonMonoDir)/MelonLoader.dll')"
+      Text="Không thấy $(MelonMonoDir)/MelonLoader.dll. Sửa GameDir tới game Mono (MelonLoader/net35 hoặc net472), hoặc copy MelonLoader.dll vào Libs/." />
+    <Error
+      Condition="'$(RequiresMcs)' == 'true' AND !Exists('$(McsDll)')"
+      Text="Không thấy $(McsDll). Compiler Mono.CSharp đi kèm repo, thư mục lib/." />
   </Target>
 </Project>

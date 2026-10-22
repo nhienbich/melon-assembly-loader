@@ -29,7 +29,7 @@ internal sealed class HotAssemblyLoader : IDisposable
     private bool disposed;
     private bool announcedLock;
 
-    internal HotAssemblyLoader(ILog log)
+    public HotAssemblyLoader(ILog log)
     {
         this.log = log;
         string directory = Path.Combine(MelonEnvironment.UserDataDirectory, DirectoryName);

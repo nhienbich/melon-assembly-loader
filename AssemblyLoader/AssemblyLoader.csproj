@@ -8,6 +8,7 @@
     <Version>1.0.0</Version>
     <AssemblyName>AssemblyLoader</AssemblyName>
     <RootNamespace>MelonAssemblyLoader</RootNamespace>
+    <RequiresMelonNet6>true</RequiresMelonNet6>
     <Description>Hot-load a C# payload into a MelonLoader IL2CPP game without restarting.</Description>
   </PropertyGroup>
 

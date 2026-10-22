@@ -115,6 +115,39 @@ MelonLoader 0.6+ IL2CPP mod that hot-loads `UserData/assembly/Payload.dll` witho
 3. Build. Put `AssemblyLoader.dll` in `Mods/`.
 4. Put `Payload.dll` in `UserData/assembly/`. The mod calls `public static void Main()` and, on change, `Unload()` then `Main()` again.
 
-`Unload()` must drop Harmony patches, Unity objects and statics or the collectible load context will stay alive. Do not call `UnityEngine.Debug` (IL2CPP access violation). Mono games are not supported.
+`Unload()` must drop Harmony patches, Unity objects and statics or the collectible load context will stay alive. Do not call `UnityEngine.Debug` (IL2CPP access violation). For Mono games, use ScriptLoader below.
 
-## Big Thank Grok AI.
+## ScriptLoader cho Mono
+
+Bản Mono theo [BepInEx.ScriptLoader](https://github.com/ghorsington/BepInEx.ScriptLoader). Thả file `.cs` vào `UserData/scripts/`, game compile bằng Mono.CSharp (`lib/mcs.dll`) rồi gọi `public static void Main()`. Sửa file thì mod gọi `Unload()` và compile lại. Không cần build DLL cho mỗi lần thử.
+
+Chỉ dành cho **game Mono**. Cần `System.Reflection.Emit`. Profile .NET Standard (có `netstandard.dll`, không có Emit) không chạy được.
+
+1. Cài MelonLoader 0.6+ cho game Mono, mở một lần.
+2. Trỏ `GameDir` trong `Directory.Build.props`. Target mặc định `net35`. Unity 2021.2+ (bleeding-edge Mono): `dotnet build MelonLoader.Mono.ScriptLoader.sln -c Release -p:MonoTf=net472`.
+3. `ScriptLoader.dll` → `Mods/`.
+4. `lib/mcs.dll` → `UserLibs/`. Không bỏ `mcs.dll` vào `Mods/`.
+
+Đổi đuôi thành `.cs.off`, hoặc ghi tên file vào `UserData/scripts/scriptignores`, để tắt một script.
+
+Metadata đặt trên cùng, trước mọi dòng không phải comment:
+
+```csharp
+// #name Hello
+// #author melon
+// #desc One line description
+// #ref ${Managed}/UnityEngine.UI.dll
+// #proc_filter YourGame.exe
+```
+
+Token đường dẫn: `Managed`, `Scripts`, `MelonLoader`, `UserLibs`, `Mods`, `UserData`.
+
+Mẫu: [Examples/Hello.cs](Examples/Hello.cs).
+
+`mcs.dll` là compiler đã sửa (C# 7, gọi được member private), lấy từ ScriptLoader. Mono không unload assembly: `Unload()` phải gỡ Harmony, Destroy object và xoá static, nếu không bản mới chồng lên bản cũ.
+
+### English
+
+Mono port of [BepInEx.ScriptLoader](https://github.com/ghorsington/BepInEx.ScriptLoader). Raw `.cs` files in `UserData/scripts` are compiled in-game with `lib/mcs.dll`. `Main()` runs after a successful compile; `Unload()` runs before the next one. Build `MelonLoader.Mono.ScriptLoader.sln` (default `net35`, pass `-p:MonoTf=net472` for Unity 2021.2+). Copy `ScriptLoader.dll` to `Mods/` and `mcs.dll` to `UserLibs/`. Header tags: `#name`, `#author`, `#desc`, `#ref`, `#proc_filter`. Path tokens: `Managed`, `Scripts`, `MelonLoader`, `UserLibs`, `Mods`, `UserData`. Disable a script with `.cs.off` or a line in `scriptignores`.
+
+### BIG THANK GROK AI

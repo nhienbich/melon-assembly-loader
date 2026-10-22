@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <Nullable>disable</Nullable>
     <LangVersion>latest</LangVersion>
     <AssemblyName>Payload</AssemblyName>
     <RequiresUnityInterop>true</RequiresUnityInterop>
@@ -11,10 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="MelonLoader">
-      <HintPath>$(MelonNet6)/MelonLoader.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
     <Reference Include="MelonLoader">
       <HintPath>$(MelonNet6)/MelonLoader.dll</HintPath>
       <Private>false</Private>
@@ -31,6 +27,10 @@
       <HintPath>$(UnityCoreModule)</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(Il2CppDir)/Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="0Harmony">
       <HintPath>$(MelonNet6)/0Harmony.dll</HintPath>
       <Private>false</Private>
@@ -39,18 +39,18 @@
       <HintPath>$(Il2CppDir)/UnityEngine.dll</HintPath>
       <Private>false</Private>
     </Reference>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>$(Il2CppDir)/Assembly-CSharp.dll</HintPath>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>$(Il2CppDir)/UnityEngine.UI.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
 
-  <!--
+  
   <Target Name="CopyToAssemblyFolder" AfterTargets="Build">
     <MakeDir Directories="$(GameDir)/UserData/assembly" />
     <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(GameDir)/UserData/assembly" SkipUnchangedFiles="true" />
-    <Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="$(GameDir)/UserData/assembly" SkipUnchangedFiles="true" Condition="Exists('$(TargetDir)$(TargetName).pdb')" />
+    <!-- <Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="$(GameDir)/UserData/assembly" SkipUnchangedFiles="true" Condition="Exists('$(TargetDir)$(TargetName).pdb')" /> -->
   </Target>
-  -->
+ 
 
 </Project>
